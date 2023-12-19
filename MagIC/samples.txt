@@ -1,0 +1,21 @@
+tab	samples
+azimuth	citations	description	dip	lat	lon	method_codes	orientation_quality	result_quality	result_type	sample	site
+0	na	measurements directions corrected with: azimuth=112.92 dip=62.3	0	19.5072	-154.841	FS-FD:SO-SM	g	g	i	A-1	A
+0	na	measurements directions corrected with: azimuth=96.78 dip=67.1	0	19.5072	-154.841	FS-FD:SO-SM	g	g	i	A-2	A
+0	na	measurements directions corrected with: azimuth=107.46 dip=65.8	0	19.5072	-154.841	FS-FD:SO-SM	g	g	i	A-3	A
+0	na	measurements directions corrected with: azimuth=110.53 dip=67.9	0	19.5072	-154.841	FS-FD:SO-SM	g	g	i	A-4	A
+0	na	measurements directions corrected with: azimuth=105.89 dip=68.7	0	19.5072	-154.841	FS-FD:SO-SM	g	g	i	A-5	A
+0	na	measurements directions corrected with: azimuth=42.66 dip=75.6	0	19.5072	-154.841	FS-FD:SO-SM	g	g	i	B-1	B
+0	na	measurements directions corrected with: azimuth=88.62 dip=54.8	0	19.5072	-154.841	FS-FD:SO-SM	g	g	i	B-10	B
+0	na	measurements directions corrected with: azimuth=37.47 dip=77.3	0	19.5072	-154.841	FS-FD:SO-SM	g	g	i	B-2	B
+0	na	measurements directions corrected with: azimuth=42.08 dip=87.7	0	19.5072	-154.841	FS-FD:SO-SM	g	g	i	B-3	B
+0	na	measurements directions corrected with: azimuth=27.09 dip=82.1	0	19.5072	-154.841	FS-FD:SO-SM	g	g	i	B-4	B
+0	na	measurements directions corrected with: azimuth=29.06 dip=80.2	0	19.5072	-154.841	FS-FD:SO-SM	g	g	i	B-5	B
+0	na	measurements directions corrected with: azimuth=32.19 dip=81.1	0	19.5072	-154.841	FS-FD:SO-SM	g	g	i	B-6	B
+0	na	measurements directions corrected with: azimuth=31.25 dip=82.8	0	19.5072	-154.841	FS-FD:SO-SM	g	g	i	B-7	B
+0	na	measurements directions corrected with: azimuth=94.02 dip=59.6	0	19.5072	-154.841	FS-FD:SO-SM	g	g	i	B-8	B
+0	na	measurements directions corrected with: azimuth=90.28 dip=69.9	0	19.5072	-154.841	FS-FD:SO-SM	g	g	i	B-9	B
+0	na	measurements directions corrected with: azimuth=58.38 dip=77.5	0	19.5072	-154.841	FS-FD:SO-SM	g	g	i	C-1	C
+0	na	measurements directions corrected with: azimuth=50.32 dip=66.5	0	19.5072	-154.841	FS-FD:SO-SM	g	g	i	C-2	C
+0	na	measurements directions corrected with: azimuth=47.5 dip=71.1	0	19.5072	-154.841	FS-FD:SO-SM	g	g	i	C-3	C
+0	na	measurements directions corrected with: azimuth=52.64 dip=74.4	0	19.5072	-154.841	FS-FD:SO-SM	g	g	i	C-4	C
