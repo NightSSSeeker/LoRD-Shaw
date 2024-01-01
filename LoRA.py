@@ -1022,7 +1022,7 @@ def LoRA_curve_fits(R_CF, P_CF, K_CF, Reg_CF, L_CF):
     PINT_RCF=[];PINT_CF=[];CF_Cuttings=[]
     for i in range(len(DelR)):
         A,B,C=curve_fit(f_1,R_CF[0],DelR[i])[0]
-        x=np.linspace(np.min(R_CF[0])*0.9,np.max(R_CF[0])*1.1,100)
+        x=np.linspace(np.min(R_CF[0])*0.9,np.max(R_CF[0])*1.1,10000)
         y=A*x+B/x+C
         plt.plot(x, y, zorder=1)
         for j in range(len(x)):
@@ -1067,7 +1067,7 @@ def LoRA_curve_fits(R_CF, P_CF, K_CF, Reg_CF, L_CF):
     
     plt.subplot(1,2,2)
     ax2=plt.gca()
-    x=np.linspace(np.min(R_CF[0])*0.9,np.max(R_CF[0])*1.1,100)
+    x=np.linspace(np.min(R_CF[0])*0.9,np.max(R_CF[0])*1.1,10000)
     y=Reg_CF[0][1]+Reg_CF[0][0]*x
     if len(PINT_CF)>0:
         plt.scatter(PINT_RCF, PINT_CF, linewidths=0.75, edgecolors='black', c='gold', marker='*', s=100, label='LoRA-Shaw (Curve fits)', zorder=2)
