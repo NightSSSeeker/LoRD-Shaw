@@ -44,6 +44,7 @@ def process_R_data(input_file, output_file, cuttings):
 
     for cutting in cuttings:
         NRM, TRM1, ARM0, ARM1, R0, R1 = [], [], [], [], [], []
+        Count=0
         for i in range(len(Raw.specimen)):
             if i == 0:
                 Specimen.append(Raw.specimen[i])
@@ -58,6 +59,7 @@ def process_R_data(input_file, output_file, cuttings):
                         Y0 = float(Raw['magn_moment'][i]) * np.cos(float(Raw['dir_inc'][i]) * np.pi / 180) * np.sin(
                             float(Raw['dir_dec'][i]) * np.pi / 180)
                         Z0 = float(Raw['magn_moment'][i]) * np.sin(float(Raw['dir_inc'][i]) * np.pi / 180)
+                        Count=1
                     if (Raw.description[i][0:3] == 'NRM') and (Raw.description[i + 1][0:3] != 'NRM'):
                         X1 = float(Raw['magn_moment'][i]) * np.cos(float(Raw['dir_inc'][i]) * np.pi / 180) * np.cos(
                             float(Raw['dir_dec'][i]) * np.pi / 180)
@@ -220,8 +222,10 @@ def process_R_data(input_file, output_file, cuttings):
                         aY1 = float(Raw['magn_moment'][i]) * np.cos(float(Raw['dir_inc'][i]) * np.pi / 180) * np.sin(
                             float(Raw['dir_dec'][i]) * np.pi / 180)
                         aZ1 = float(Raw['magn_moment'][i]) * np.sin(float(Raw['dir_inc'][i]) * np.pi / 180)
-                        ARM1.append(np.sqrt((aX0 - aX1) ** 2 + (aY0 - aY1) ** 2 + (aZ0 - aZ1) ** 2))
-                    
+                        ARM1.append(np.sqrt((aX0 - aX1) ** 2 + (aY0 - aY1) ** 2 + (aZ0 - aZ1) ** 2))                   
+        if Count==0:
+            print('please select an appropriate AF cutting instead of %f.'%cutting)
+            return
 
         for i in range(len(NRM)):
             R0.append(NRM[i] / ARM0[i])
