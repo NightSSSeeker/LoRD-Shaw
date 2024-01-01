@@ -812,6 +812,7 @@ def LoRA_PRR(R_PRR, P_PRR, K_PRR, Reg_PRR, L_PRR):
                 else:
                     plt.scatter((Reg_Sel[j][1]-Reg_Sel[i][1])/(Reg_Sel[i][0]-Reg_Sel[j][0]), (Reg_Sel[j][1]-Reg_Sel[i][1])/(Reg_Sel[i][0]-Reg_Sel[j][0])*Reg_Sel[i][0]+Reg_Sel[i][1], linewidths=0.75, edgecolors='black', c='gold', marker='*', s=100)
                 Label_Pair.append([Label_Sel[i],Label_Sel[j]])
+                Label_Count=1
     ax.set_xlim(Min_All,Max_All)
     ax.set_ylim(np.min(P_PRR)*0.9,(np.max(P_PRR)*1.1))
     ax.set_xticks(tick_x)
@@ -884,6 +885,7 @@ def LoRA_RR(R_RR, P_RR, K_RR, Reg_RR, Reg_RR_P, L_RR):
                 else:
                     plt.scatter((Reg_Sel[j][1]-Reg_Sel[i][1])/(Reg_Sel[i][0]-Reg_Sel[j][0]), (Reg_Sel[j][1]-Reg_Sel[i][1])/(Reg_Sel[i][0]-Reg_Sel[j][0])*Reg_Sel[i][0]+Reg_Sel[i][1], linewidths=0.75, edgecolors='black', c='gold', marker='*', s=100)
                 Label_Pair.append([Label_Sel[i],Label_Sel[j]])
+                Label_Count=1
     ax.set_xlim(np.min(R_RR[0])*0.9,(np.max(R_RR[0])*1.1))
     ax.set_ylim(Min_All,Max_All)
     ax.set_xticks(tick_x)
@@ -1031,13 +1033,13 @@ def LoRA_curve_fits(R_CF, P_CF, K_CF, Reg_CF, L_CF):
         plt.plot(x, y, zorder=1)
         for j in range(len(x)):
             if A*B>0 and A>0:
-                if y[j]==np.min(y):
+                if y[j]==np.min(y) and j!=0 and j!=np.max(x):
                     plt.scatter(x[j], y[j], color='black' ,marker="v", s=50, zorder=2)
                     CF_Cuttings.append(Labels[i+1])
                     PINT_RCF.append(x[j])
                     PINT_CF.append(x[j]*Reg_CF[0][0]+Reg_CF[0][1])
             if A*B>0 and A<0:
-                if y[j]==np.max(y):
+                if y[j]==np.max(y) and j!=0 and j!=np.max(x):
                     plt.scatter(x[j], y[j], color='black', marker="v", s=50, zorder=2)
                     CF_Cuttings.append(Labels[i+1])
                     PINT_RCF.append(x[j])
