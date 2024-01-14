@@ -788,8 +788,8 @@ def LoRA_PRR(R_PRR, P_PRR, K_PRR, Reg_PRR, L_PRR):
     for i in range(len(R_PRR)):
         x=np.linspace(Min_All,Max_All,100)
         y=Reg_PRR[i][1]+Reg_PRR[i][0]*x
-        plt.scatter(R_PRR[i], P_PRR, color=np.array(plt.cm.tab10(i)), s=30)
-        plt.plot(x, y, linestyle='dashed', color=np.array(plt.cm.tab10(i)), markersize=15, label=Labels[i])
+        plt.scatter(R_PRR[i], P_PRR, color=np.array(plt.cm.tab10(i)), s=30, zorder=1)
+        plt.plot(x, y, linestyle='dashed', color=np.array(plt.cm.tab10(i)), markersize=15, label=Labels[i], zorder=1)
     plt.xlabel('R$_0$/R$_1$',font2)
     plt.ylabel('Paleointensity ($\mu$T)',font2)
     tick_div=5
@@ -808,9 +808,9 @@ def LoRA_PRR(R_PRR, P_PRR, K_PRR, Reg_PRR, L_PRR):
             if max(Reg_Sel[j][4],Reg_Sel[i][4])<abs(Reg_Sel[j][0]-Reg_Sel[i][0]):
                 PINTC.append((Reg_Sel[j][1]-Reg_Sel[i][1])/(Reg_Sel[i][0]-Reg_Sel[j][0])*Reg_Sel[i][0]+Reg_Sel[i][1])
                 if Label_Count==0:
-                    plt.scatter((Reg_Sel[j][1]-Reg_Sel[i][1])/(Reg_Sel[i][0]-Reg_Sel[j][0]), (Reg_Sel[j][1]-Reg_Sel[i][1])/(Reg_Sel[i][0]-Reg_Sel[j][0])*Reg_Sel[i][0]+Reg_Sel[i][1], linewidths=0.75, edgecolors='black', c='gold', marker='*', s=100, label='LoRA-Shaw (PRR)')
+                    plt.scatter((Reg_Sel[j][1]-Reg_Sel[i][1])/(Reg_Sel[i][0]-Reg_Sel[j][0]), (Reg_Sel[j][1]-Reg_Sel[i][1])/(Reg_Sel[i][0]-Reg_Sel[j][0])*Reg_Sel[i][0]+Reg_Sel[i][1], linewidths=0.75, edgecolors='black', c='gold', marker='*', s=100, label='LoRA-Shaw (PRR)', zorder=2)
                 else:
-                    plt.scatter((Reg_Sel[j][1]-Reg_Sel[i][1])/(Reg_Sel[i][0]-Reg_Sel[j][0]), (Reg_Sel[j][1]-Reg_Sel[i][1])/(Reg_Sel[i][0]-Reg_Sel[j][0])*Reg_Sel[i][0]+Reg_Sel[i][1], linewidths=0.75, edgecolors='black', c='gold', marker='*', s=100)
+                    plt.scatter((Reg_Sel[j][1]-Reg_Sel[i][1])/(Reg_Sel[i][0]-Reg_Sel[j][0]), (Reg_Sel[j][1]-Reg_Sel[i][1])/(Reg_Sel[i][0]-Reg_Sel[j][0])*Reg_Sel[i][0]+Reg_Sel[i][1], linewidths=0.75, edgecolors='black', c='gold', marker='*', s=100, zorder=2)
                 Label_Pair.append([Label_Sel[i],Label_Sel[j]])
                 Label_Count=1
     ax.set_xlim(Min_All,Max_All)
@@ -862,17 +862,17 @@ def LoRA_RR(R_RR, P_RR, K_RR, Reg_RR, Reg_RR_P, L_RR):
     for i in range(len(Reg_RR)):
         x=np.linspace(np.min(R_RR[0])*0.9,np.max(R_RR[0])*1.1,100)
         y=Reg_RR[i][1]+Reg_RR[i][0]*x
-        plt.scatter(R_RR[0], R_RR[i+1], color=np.array(plt.cm.tab10(i)), s=30)
-        plt.plot(x, y, linestyle='dashed', color=np.array(plt.cm.tab10(i)), markersize=15, label=Labels[i+1])
+        plt.scatter(R_RR[0], R_RR[i], color=np.array(plt.cm.tab10(i)), s=30, zorder=1)
+        plt.plot(x, y, linestyle='dashed', color=np.array(plt.cm.tab10(i)), markersize=15, label=Labels[i], zorder=1)
     plt.xlabel('R$_0$/R$_1$ (baseline)',font2)
     plt.ylabel('R$_0$/R$_1$ (X mT)',font2)
     tick_div=5
     tick_x=[float('{:.2f}'.format(np.min(R_RR[0])*0.9+(np.max(R_RR[0])*1.1-np.min(R_RR[0])*0.9)*(i+1)/tick_div)) for i in range(tick_div)]
     tick_y=[float('{:.2f}'.format(Min_All+(Max_All-Min_All)*(i+1)/tick_div)) for i in range(tick_div)]
-    Reg_Sel=[];Label_Sel=[]
+    Reg_Sel=[Reg_RR[0]];Label_Sel=['Baseline']
     for i in range(len(K_RR)):
         if K_RR[i]<0.2:
-            Reg_Sel.append(Reg_RR[i])
+            Reg_Sel.append(Reg_RR[i+1])
             Label_Sel.append(Labels[i+1])
     PINTC_R=[];Label_Pair=[];PINTC=[]
     Label_Count=0
@@ -881,9 +881,9 @@ def LoRA_RR(R_RR, P_RR, K_RR, Reg_RR, Reg_RR_P, L_RR):
             if max(Reg_Sel[j][4],Reg_Sel[i][4])<abs(Reg_Sel[j][0]-Reg_Sel[i][0]):
                 PINTC_R.append((Reg_Sel[j][1]-Reg_Sel[i][1])/(Reg_Sel[i][0]-Reg_Sel[j][0]))
                 if Label_Count==0:
-                    plt.scatter((Reg_Sel[j][1]-Reg_Sel[i][1])/(Reg_Sel[i][0]-Reg_Sel[j][0]), (Reg_Sel[j][1]-Reg_Sel[i][1])/(Reg_Sel[i][0]-Reg_Sel[j][0])*Reg_Sel[i][0]+Reg_Sel[i][1], linewidths=0.75, edgecolors='black', c='gold', marker='*', s=100, label='LoRA-Shaw (RR)')
+                    plt.scatter((Reg_Sel[j][1]-Reg_Sel[i][1])/(Reg_Sel[i][0]-Reg_Sel[j][0]), (Reg_Sel[j][1]-Reg_Sel[i][1])/(Reg_Sel[i][0]-Reg_Sel[j][0])*Reg_Sel[i][0]+Reg_Sel[i][1], linewidths=0.75, edgecolors='black', c='gold', marker='*', s=100, label='LoRA-Shaw (RR)', zorder=2)
                 else:
-                    plt.scatter((Reg_Sel[j][1]-Reg_Sel[i][1])/(Reg_Sel[i][0]-Reg_Sel[j][0]), (Reg_Sel[j][1]-Reg_Sel[i][1])/(Reg_Sel[i][0]-Reg_Sel[j][0])*Reg_Sel[i][0]+Reg_Sel[i][1], linewidths=0.75, edgecolors='black', c='gold', marker='*', s=100)
+                    plt.scatter((Reg_Sel[j][1]-Reg_Sel[i][1])/(Reg_Sel[i][0]-Reg_Sel[j][0]), (Reg_Sel[j][1]-Reg_Sel[i][1])/(Reg_Sel[i][0]-Reg_Sel[j][0])*Reg_Sel[i][0]+Reg_Sel[i][1], linewidths=0.75, edgecolors='black', c='gold', marker='*', s=100, zorder=2)
                 Label_Pair.append([Label_Sel[i],Label_Sel[j]])
                 Label_Count=1
     ax.set_xlim(np.min(R_RR[0])*0.9,(np.max(R_RR[0])*1.1))
@@ -903,8 +903,8 @@ def LoRA_RR(R_RR, P_RR, K_RR, Reg_RR, Reg_RR_P, L_RR):
     x=np.linspace(np.min(R_RR[0])*0.9,np.max(R_RR[0])*1.1,100)
     y=Reg_RR_P[0][1]+Reg_RR_P[0][0]*x
     if len(PINTC)>0:
-        plt.scatter(PINTC_R, PINTC, linewidths=0.75, edgecolors='black', c='gold', marker='*', s=100, label='LoRA-Shaw (RR)')
-    plt.plot(x, y, linestyle='solid', color='black', markersize=15, label='Baseline regression')
+        plt.scatter(PINTC_R, PINTC, linewidths=0.75, edgecolors='black', c='gold', marker='*', s=100, label='LoRA-Shaw (RR)', zorder=2)
+    plt.plot(x, y, linestyle='solid', color='black', markersize=15, label='Baseline regression', zorder=1)
     plt.xlabel('R$_0$/R$_1$ (baseline)',font2)
     plt.ylabel('Paleointensity ($\mu$T)',font2)
     tick_div=5
@@ -955,8 +955,8 @@ def LoRA_PR(R_PR, P_PR, K_PR, Reg_PR, L_PR):
     for i in range(len(R_PR)):
         x=np.linspace(Min_All,Max_All,100)
         y=Reg_PR[i][1]+Reg_PR[i][0]*x
-        plt.scatter(R_PR[i], P_PR, color=np.array(plt.cm.tab10(i)), s=30)
-        plt.plot(x, y, linestyle='dashed', color=np.array(plt.cm.tab10(i)), markersize=15, label=Labels[i])
+        plt.scatter(R_PR[i], P_PR, color=np.array(plt.cm.tab10(i)), s=30, zorder=1)
+        plt.plot(x, y, linestyle='dashed', color=np.array(plt.cm.tab10(i)), markersize=15, label=Labels[i], zorder=1)
     plt.xlabel('R$_0$/R$_1$',font2)
     plt.ylabel('Paleointensity ($\mu$T)',font2)
     tick_div=5
@@ -974,10 +974,10 @@ def LoRA_PR(R_PR, P_PR, K_PR, Reg_PR, L_PR):
             if max(Reg_Sel[j][4],Reg_Sel[i][4])<abs(Reg_Sel[j][0]-Reg_Sel[i][0]):                
                 PINTC.append((Reg_Sel[j][1]-Reg_Sel[i][1])/(Reg_Sel[i][0]-Reg_Sel[j][0])*Reg_Sel[i][0]+Reg_Sel[i][1])
                 if Label_Count==0:
-                    plt.scatter((Reg_Sel[j][1]-Reg_Sel[i][1])/(Reg_Sel[i][0]-Reg_Sel[j][0]), (Reg_Sel[j][1]-Reg_Sel[i][1])/(Reg_Sel[i][0]-Reg_Sel[j][0])*Reg_Sel[i][0]+Reg_Sel[i][1], linewidths=0.75, edgecolors='black', c='gold', marker='*', s=100, label='LoRA-Shaw (PR)')
+                    plt.scatter((Reg_Sel[j][1]-Reg_Sel[i][1])/(Reg_Sel[i][0]-Reg_Sel[j][0]), (Reg_Sel[j][1]-Reg_Sel[i][1])/(Reg_Sel[i][0]-Reg_Sel[j][0])*Reg_Sel[i][0]+Reg_Sel[i][1], linewidths=0.75, edgecolors='black', c='gold', marker='*', s=100, label='LoRA-Shaw (PR)', zorder=2)
                 else:
-                    plt.scatter((Reg_Sel[j][1]-Reg_Sel[i][1])/(Reg_Sel[i][0]-Reg_Sel[j][0]), (Reg_Sel[j][1]-Reg_Sel[i][1])/(Reg_Sel[i][0]-Reg_Sel[j][0])*Reg_Sel[i][0]+Reg_Sel[i][1], linewidths=0.75, edgecolors='black', c='gold', marker='*', s=100)
-                    Label_Count+=1
+                    plt.scatter((Reg_Sel[j][1]-Reg_Sel[i][1])/(Reg_Sel[i][0]-Reg_Sel[j][0]), (Reg_Sel[j][1]-Reg_Sel[i][1])/(Reg_Sel[i][0]-Reg_Sel[j][0])*Reg_Sel[i][0]+Reg_Sel[i][1], linewidths=0.75, edgecolors='black', c='gold', marker='*', s=100, zorder=2)
+                Label_Count+=1
                 Label_Pair.append([Label_Sel[i],Label_Sel[j]])
     ax.set_xlim(Min_All,Max_All)
     ax.set_ylim(np.min(P_PR)*0.9,(np.max(P_PR)*1.1))
@@ -1130,8 +1130,7 @@ def LoRA_Shaw(input_file_1='R_Cuttings', input_file_2='PINT_Sel', method='PRR', 
             for j in range(len(SelP)):
                 SelR[count].append(float(R[R.columns.values[i]][Sel[j]]/R[R.columns.values[i+1]][Sel[j]]))                
             Reg_P.append(stats.linregress(SelR[count],SelP))
-            if count>0:
-                Reg_R.append(stats.linregress(SelR[0],SelR[count]))
+            Reg_R.append(stats.linregress(SelR[0],SelR[count]))
             if i==1:
                 Labels.append('Baseline')
             elif R.columns.values[i][3:]!='NRM':
@@ -1141,7 +1140,7 @@ def LoRA_Shaw(input_file_1='R_Cuttings', input_file_2='PINT_Sel', method='PRR', 
             count+=1
         for i in range(len(SelR)-1):
             Krv_R.append(lib_k.AraiCurvature(x=SelR[0],y=SelR[i+1])[0])
-        for i in range(len(Krv_P)-1):
+        for i in range(len(SelR)):
             Krv_P.append(lib_k.AraiCurvature(x=SelR[i],y=SelP)[0])
         if method=='PRR':
             LoRA_PRR(SelR, SelP, Krv_R, Reg_P, Labels)
